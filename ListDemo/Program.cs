@@ -16,7 +16,7 @@ namespace ListDemo
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Lesson9Form());
+            Application.Run(new CalculateForm());
         }
     }
 }
