@@ -29,8 +29,8 @@ namespace ListDemo
 
 
             ActiveLabel = null;
-            NumberButtonTableLayout.Visible = false;
-            Size= new Size(320,480);
+            NumericKeyboardPanel.Visible = false;
+            Size = new Size(320, 480);
 
         }
         /// <summary>
@@ -46,7 +46,7 @@ namespace ListDemo
             {
                 ActiveLabel.BackColor = Color.White;
             }
-            NumberButtonTableLayout.Visible = false;
+            NumericKeyboardPanel.Visible = false;
             ActiveLabel = null;
         }
 
@@ -131,7 +131,7 @@ namespace ListDemo
             ActiveLabel.Text = outputValue.ToString();
             ClearNumericKeyboard();
 
-            NumberButtonTableLayout.Visible = false;
+            NumericKeyboardPanel.Visible = false;
             ActiveLabel.BackColor = Color.White;
             ActiveLabel = null;
         }
@@ -178,15 +178,33 @@ namespace ListDemo
             }
             ActiveLabel = sender as Label;
             ActiveLabel.BackColor = Color.LightBlue;
-            NumberButtonTableLayout.Visible = true;
+            NumericKeyboardPanel.Visible = true;
             if (ActiveLabel.Text != "0")
             {
                 lblResult.Text = ActiveLabel.Text;
                 outputString = ActiveLabel.Text;
             }
-            NumberButtonTableLayout.Location=new Point(12,ActiveLabel.Location.Y+40);
-            NumberButtonTableLayout.BringToFront();
+            NumericKeyboardPanel.Location = new Point(12, ActiveLabel.Location.Y + 40);
+            NumericKeyboardPanel.BringToFront();
+            AnimationTimer.Enabled = true;
         }
+        /// <summary>
+        /// This is event handler for the Animation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AnimationTimer_Tick(object sender, EventArgs e)
+        {
+            var currentLocation = NumericKeyboardPanel.Location;
+            currentLocation = new Point(currentLocation.X, currentLocation.Y - 20);
+            NumericKeyboardPanel.Location = new Point();
 
+            if (currentLocation.Y <= ActiveLabel.Location.Y + 45)
+            {
+                NumericKeyboardPanel.Location = new Point(currentLocation.X, ActiveLabel.Location.Y + 45);
+                AnimationTimer.Enabled = false;
+            }
+
+        }
     }
 }
