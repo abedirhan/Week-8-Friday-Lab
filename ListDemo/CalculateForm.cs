@@ -26,9 +26,11 @@ namespace ListDemo
         private void CalculateForm_Load(object sender, EventArgs e)
         {
             ClearNumericKeyboard();
-           
-            NumberButtonTableLayout.Visible = false;
+
+
             ActiveLabel = null;
+            NumberButtonTableLayout.Visible = false;
+            Size= new Size(320,480);
 
         }
         /// <summary>
@@ -73,7 +75,7 @@ namespace ListDemo
                     {
                         outputString += tag;
                     }
-                    
+
                 }
 
                 lblResult.Text = outputString;
@@ -120,7 +122,7 @@ namespace ListDemo
             outputValue = float.Parse(outputString);
 
             outputValue = (float)(Math.Round(outputValue, 1));
-            
+
             if (outputValue < 0.1f)
             {
                 outputValue = 0.1f;
@@ -143,7 +145,7 @@ namespace ListDemo
             }
 
             outputString = outputString.Remove(outputString.Length - 1);
-           
+
             if (outputString.Length == 0)
             {
                 outputString = "0";
@@ -157,11 +159,11 @@ namespace ListDemo
             outputString = "0";
             outputValue = 0.0f;
             decimalExits = false;
-            
+
 
         }
 
-      
+
         /// <summary>
         /// This is the event handler for the heightlabel click
         /// </summary>
@@ -174,15 +176,17 @@ namespace ListDemo
                 ActiveLabel.BackColor = Color.White;
                 ActiveLabel = null;
             }
-            ActiveLabel=sender as Label;
+            ActiveLabel = sender as Label;
             ActiveLabel.BackColor = Color.LightBlue;
             NumberButtonTableLayout.Visible = true;
-            if (ActiveLabel.Text!= "0")
+            if (ActiveLabel.Text != "0")
             {
                 lblResult.Text = ActiveLabel.Text;
                 outputString = ActiveLabel.Text;
             }
+            NumberButtonTableLayout.Location=new Point(12,ActiveLabel.Location.Y+40);
+            NumberButtonTableLayout.BringToFront();
         }
-       
+
     }
 }
